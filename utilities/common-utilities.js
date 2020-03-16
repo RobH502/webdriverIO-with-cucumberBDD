@@ -88,6 +88,15 @@ module.exports = {
       return myArray.constructor.toString().indexOf("Array") > -1;
   },
 
+/******************************************************************************************
+ * method generateEmail()
+ * generates and returns a random test email address using a timestamp - return type is always string
+ */
+
+  generateEmail : function () {
+    return 'testing' + Date.now().toString() + '@dispostable.com';
+  },
+
   /***************************************************************************************/
   /*
    * method getObjValues (myjson)
