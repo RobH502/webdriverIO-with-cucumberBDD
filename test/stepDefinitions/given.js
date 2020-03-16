@@ -1,16 +1,45 @@
 import { Given} from 'cucumber';
-import loginPage from '../pageobjects/ta-login.page';
-import yahooPage from '../pageobjects/yahoo-search.page';
+import footerSection from '../pageobjects/footer.page';
+import loginPage from '../pageobjects/login.page';
+import registerPage from '../pageobjects/registration.page';
+import myAccountPage from '../pageobjects/myaccount.page';
+import videoGamesPage from '../pageobjects/videogames.page';
 
 
-// *** belongs to Yahoo serch feature
-Given(/^I am on the search page$/, function () {
-  yahooPage.open();
-  browser.getTitle().should.equal('Yahoo Search - Web Search');
+//Generic basic login for tests
+Given('I am logged in', function() {
+  loginPage.loginBasic();
 });
 
-Given('I am on the phptravels page', function () {
-  // Write code here that turns the phrase above into concrete actions
-  loginPage.open();     // navigating to login page
-  expect(browser.compareScreen('test',{autoSaveBaseline: true}).misMatchPercentage).equal(0);
+//Generic function to access the homepage
+Given('I am on the site homepage', function() {
+  footerSection.loadHomepage();
+})
+
+//Login page
+Given('I am on the login page', function() {
+  loginPage.open();
+  browser.getTitle().should.equal('Your store. Login');
+});
+
+//Registration page
+Given('I am on the register page', function() {
+  registerPage.open();
+  browser.getTitle().should.equal('Your store. Register');
+});
+
+//My account page
+Given('I am logged into the site', function() {
+  loginPage.isLogoutShowing.should.be.true;
+})
+
+Given('I am on the My account page', function() {
+  myAccountPage.loadMyAccountPage();
+});
+
+
+//Video Games Page
+Given('I am on the homepage', function() {
+  videoGamesPage.open();
+  browser.getTitle().should.equal('Your store');
 });
