@@ -75,11 +75,15 @@ Then(/^the page with the url "(\D+)" should load in a separate tab$/, function(u
 
 Then(/^I should see the validation error message "Enter valid email"$/, function() {
   footerSection.emailValidation();
-})
+});
 
 Then('I should see the validation message saying that a verification email has been sent', function() {
   footerSection.successValidation();
-})
+});
+
+Then(/^the "nopCommerce" page with the url "([^"]*)" should load in a separate tab$/, function(url) {
+  footerSection.loadedNopComPage(url);
+});
 
 
 //Transactions
