@@ -204,8 +204,8 @@ class MyAccount extends Page {
 
     //Delete the last address listed
     addressDelete() {
-            browser.acceptAlert();
             this.addressDeleteButton.click();
+            browser.acceptAlert();
     }
 
 
