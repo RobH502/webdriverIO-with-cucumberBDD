@@ -22,23 +22,30 @@ class Footer extends Page {
     get newProductsLink() { return $('//a[contains(@href, "/newproducts") and text()="New products"]'); }
 
     //My account links
-    get myAccountLink() { return $('//a[contains(@href, "/customer/info") and text()="My account"]'); }
-    get ordersLink() { return $('//a[contains(@href, "/order/history") and text()="Orders"]'); }
-    get addressesLink() { return $('//a[contains(@href, "/customer/addresses") and text()="Addresses"]'); }
-    get shoppingCartLink() { return $('//a[contains(@href, "/cart") and text()="Shopping cart"]'); }
-    get wishlistLink() { return $('//a[contains(@href, "/wishlist") and text()="Wishlist"]'); }
-    get applyForVendorAccountLink() { return $('//a[contains(@href, "/vendor/apply") and text()="Apply for vendor account"]'); }
+    get myAccountLink()              { return $('//a[contains(@href, "/customer/info") and text()="My account"]'); }
+    get ordersLink()                 { return $('//a[contains(@href, "/order/history") and text()="Orders"]'); }
+    get addressesLink()              { return $('//a[contains(@href, "/customer/addresses") and text()="Addresses"]'); }
+    get shoppingCartLink()           { return $('//a[contains(@href, "/cart") and text()="Shopping cart"]'); }
+    get wishlistLink()               { return $('//a[contains(@href, "/wishlist") and text()="Wishlist"]'); }
+    get applyForVendorAccountLink()  { return $('//a[contains(@href, "/vendor/apply") and text()="Apply for vendor account"]'); }
 
     //Follow us links
-    get facebookLink() { return $('//a[contains(@href, "//www.facebook.com/nopCommerce") and text()="Facebook"]'); }
-    get twitterLink() { return $('//a[contains(@href, "//twitter.com/nopCommerce") and text()="Twitter"]'); }
-    get youTubeLink() { return $('//a[contains(@href, "//www.youtube.com/nopCommerce") and text()="YouTube"]'); }
+    get facebookLink()               { return $('//a[contains(@href, "//www.facebook.com/nopCommerce") and text()="Facebook"]'); }
+    get twitterLink()                { return $('//a[contains(@href, "//twitter.com/nopCommerce") and text()="Twitter"]'); }
+    get youTubeLink()                { return $('//a[contains(@href, "//www.youtube.com/user/nopCommerce") and text()="YouTube"]'); }
+
+    //Subscription
+    
+    get newsletterEmailField()       { return $('//input[@id="newsletter-email" and @type="email"]'); }
+    get subscribeButton()            { return $('//input[@id="newsletter-subscribe-button" and @value="Subscribe"]'); }
+    get enterValidEmailMessage()     { return $('//*[@id="newsletter-result-block" and text()="Enter valid email"]'); }
+    get successValidationMessage()   { return $('//*[@id="newsletter-result-block" and contains(text(), "Thank you")]'); }
 
     //nopCommerce link
-    get nopCommerceLink() { return $('//a[contains(@href, "//www.nopcommerce.com") and text()="nopCommerce"]'); }
+    get nopCommerceLink()            { return $('//a[contains(@href, "//www.nopcommerce.com") and text()="nopCommerce"]'); }
 
     //Footer disclaimer
-    get footerDisclaimer() { return $('//*[@class="footer-disclaimer"]'); }
+    get footerDisclaimer()           { return $('//*[@class="footer-disclaimer"]'); }
 
 
     //**********************************************************************************************
@@ -182,7 +189,30 @@ class Footer extends Page {
     }
 
 
-        //**********************************************************************************************
+    //**********************************************************************************************
+    //Subscribe
+
+    //Click the "Subscribe" button
+    clickSubscribe() {
+        this.subscribeButton.click();
+    }
+
+    //Enter a valid email address into the email address under "Newsletter"
+    enterSubscriptionEmail(email) {
+        this.newsletterEmailField.setValue(email)
+    }
+
+    //Check for email validation error message
+    emailValidation() {
+        this.enterValidEmailMessage.waitForDisplayed(3000);
+        return this.enterValidEmailMessage.isDisplayed().should.be.true;
+    }
+
+    //Check for validation message confirming success of subscription
+    successValidation() {
+        this.successValidationMessage.waitForDisplayed(3000);
+        return this.successValidationMessage.isDisplayed().should.be.true;
+    }
 }
 
 export default new Footer();
