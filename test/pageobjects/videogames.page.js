@@ -4,15 +4,30 @@ import loginPage from './login.page';
 
 class VideoGamesPage extends Page {
 
-    get videoGamesHeader()        { return $('//*[@class="page-title"]//child::h1'); }
-    get videoGamesLink()          { return $('//a[contains(@href, "/video-games")]'); }
-    get xboxOneLink()             { return $('//a[contains(@href, "/xbox-one")]'); }
-    get nintendoSwitch()          { return $('//a[contains(@href, "/nintendo-switch")]'); }
+    /*
+     * define elements
+     */
+
+    get videoGamesHeader()            { return $('//*[@class="page-title"]//child::h1'); }
+    get videoGamesLink()              { return $('//a[contains(@href, "/video-games")]'); }
+    get xboxOneLink()                 { return $('//a[contains(@href, "/xbox-one")]'); }
+    get nintendoSwitch()              { return $('//a[contains(@href, "/nintendo-switch")]'); }
 
     //Xbox One Submenu Items
-    get xboxOneConsoles()         { return $('//a[contains(@href, "/xbox-one-consoles")]'); }
-    get xboxOneGames()            { return $('//a[contains(@href, "/xbox-one-games")]'); }    
-    get xboxOneAccessories()      { return $('//a[contains(@href, "/xbox-one-accessories")]'); }
+    get xboxOneConsoles()             { return $('//a[contains(@href, "/xbox-one-consoles")]'); }
+    get xboxOneGames()                { return $('//a[contains(@href, "/xbox-one-games")]'); }    
+    get xboxOneAccessories()          { return $('//a[contains(@href, "/xbox-one-accessories")]'); }
+
+    //Nintendo Switch Submenu Items
+    get nintendoSwitchConsoles()      { return $('//a[contains(@href, "/nintendo-switch-consoles")]'); }
+    get nintendoSwitchGames()         { return $('//a[contains(@href, "/nintendo-switch-games")]'); }
+    get nintendoSwitchAccessories()   { return $('//a[contains(@href, "/nintendo-switch-accessories")]'); }
+
+
+    //***********************************************************************************
+    /*
+     * define or overwrite page methods
+     */
 
     open() {
         super.open('');
@@ -28,7 +43,7 @@ class VideoGamesPage extends Page {
             case "Xbox One":
                 this.xboxOneLink.moveTo();
                 break;
-            case "Nintento Switch":
+            case "Nintendo Switch":
                 this.nintendoSwitch.moveTo();
                 break;
         }
@@ -54,20 +69,39 @@ class VideoGamesPage extends Page {
     }
 
     //***********************************************************************************
-    //Xbox Submenu
+    //Xbox One Submenu
 
-    //Click one of the three options in the Xbox submenu
+    //Click one of the three options in the Xbox One sub-menu
     selectXboxSubmenuOption(menuOpt) {
         this.xboxOneConsoles.moveTo();
         switch(menuOpt) {
-            case "Xbox One Consoles":
+            case 'Xbox One Consoles':
                 this.xboxOneConsoles.click();
                 break;
-            case "Xbox One Games":
+            case 'Xbox One Games':
                 this.xboxOneGames.click();
                 break;
-            case "Xbox One Accessories":
+            case 'Xbox One Accessories':
                 this.xboxOneAccessories.click();
+                break;
+        }
+    }
+
+    //***********************************************************************************
+    //Nintendo Switch Submenu
+
+    //Click one of the three options in the Nintendo Switch submenu
+    selectSwitchSubmenuOption(menuOpt) {
+        this.nintendoSwitchConsoles.moveTo();
+        switch(menuOpt) {
+            case 'Nintendo Switch Consoles':
+                this.nintendoSwitchConsoles.click();
+                break;
+            case 'Nintendo Switch Games':
+                this.nintendoSwitchGames.click();
+                break;
+            case 'Nintendo Switch Accessories':
+                this.nintendoSwitchAccessories.click();
                 break;
         }
     }
