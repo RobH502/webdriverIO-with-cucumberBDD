@@ -65,6 +65,7 @@ When(/^I click the "([^"]*)" radio option$/, function(gender) {
     myAccountPage.changeGender(gender);
 });
 
+
 //Change password
 When(/^I see the message "(\D+)"$/, function (message) {
     myAccountPage.passwordChangedShown(message);
@@ -82,6 +83,7 @@ When(/^I edit the entry in the "([^"]*)" field "([^"]*)"$/, function (field, nam
     myAccountPage.editNameFields(field, name);
 });
 
+
 //New Address
 When('I click the address Save button', function() {
     myAccountPage.saveAddress();
@@ -94,8 +96,8 @@ When(/^I fill out the first name, last name, and email fields "([^"]*)" "([^"]*)
     browser.pause(3000);
 });
 
-When(/^I select options from the Country field "([^"]*)"$/, function(country) {
-    myAccountPage.addressCountryField(country);
+When(/^I select options from the Country and State fields "(\D+)" "(\D+)"$/, function(country, state) {
+    myAccountPage.addressCountryField(country, state);
 });
 
 When(/^I fill out the City and Address 1 fields "([^"]*)" "([^"]*)"$/, function(city, address) {
@@ -111,8 +113,32 @@ When(/^I fill out the Zip postal code and Phone number fields "(\d+)" "(\d+)"$/,
 });
 
 
+//Delete Address
+When(/^I add a new address <fName> <lName> <email> <city> <address 1> <zipCode> <phoneNum> <country> <state>$/, function(fName, lName, email, city, address, zipCode, phoneNum, country, state) {
+    myAccountPage.addressInputFields("First name", fName);
+    myAccountPage.addressInputFields("Last name", lName);
+    myAccountPage.addressInputFields("Email", email);
+    myAccountPage.addressCountryField(country, state);
+    myAccountPage.addressInputFields("City", city);
+    myAccountPage.addressInputFields("Address 1", address);
+})
+
+When('I click the Delete button on an existing address and accept the alert', function() {
+    myAccountPage.addressDelete();
+});
+
+// When('I click OK on the popup modal', function() {
+//     myAccountPage.addressDelete();
+// });
+
+
 //*****************************************************************************************
 //Video Games
+When('I go to the login page', function() {
+    loginPage.open();
+    browser.getTitle().should.equal('Your store. Login');
+});
+
 When('I click the Video Games link', function() {
     videoGamesPage.clickLink();
 });
@@ -151,6 +177,22 @@ When(/^I click the "(\D+)" Follow us link$/, function (link) {
 //*****************************************************************************************
 //Transactions
 
-When('When I load the video games page', function() {
+When('I load the video games page', function() {
     transactions.open();
+});
+
+When(/^I attempt to add an item "([^"]*)" to the shopping cart$/, function(item) {
+    transactions.addToCart(item);
+});
+
+When('I go to my shopping cart', function() {
+    transactions.toCart();
+});
+
+When('I complete the checkout flow', function() {
+    transactions.checkout();
+});
+
+When('I go to the Orders tab in My account', function() {
+    transactions.ordersTab();
 });
