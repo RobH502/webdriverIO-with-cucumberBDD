@@ -3,18 +3,35 @@ import utl from '../../utilities/common-utilities';
 
 class RegisterPage extends Page {
 
-    get maleRadio()           { return $('//input[@id="gender-male"]'); }
-    get femaleRadio()         { return $('//input[@id="gender-female"]'); }
-    get firstName()           { return $('//input[@id="FirstName"]'); }
-    get lastName()            { return $('//input[@id="LastName"]'); }
-    get bdDay()               { return $('//select[@name="DateOfBirthDay"]'); }
-    get bdMonth()             { return $('//select[@name="DateOfBirthMonth"]'); }
-    get bdYear()              { return $('//select[@name="DateOfBirthYear"]'); }
-    get email()               { return $('//input[@id="Email"]'); }
-    get password()            { return $('//input[@id="Password"]'); }
-    get confirmPassword()     { return $('//input[@id="ConfirmPassword"]'); }
-    get registerButton()      { return $('//input[@id="register-button"]'); }
-    get registerComplete()    { return $('//div[@class="result" and text()="Your registration completed"]'); }
+    /*
+     * define elements
+     */
+
+    get maleRadio()              { return $('//input[@id="gender-male"]'); }
+    get femaleRadio()            { return $('//input[@id="gender-female"]'); }
+    get firstName()              { return $('//input[@id="FirstName"]'); }
+    get lastName()               { return $('//input[@id="LastName"]'); }
+    get bdDay()                  { return $('//select[@name="DateOfBirthDay"]'); }
+    get bdMonth()                { return $('//select[@name="DateOfBirthMonth"]'); }
+    get bdYear()                 { return $('//select[@name="DateOfBirthYear"]'); }
+    get email()                  { return $('//input[@id="Email"]'); }
+    get password()               { return $('//input[@id="Password"]'); }
+    get confirmPassword()        { return $('//input[@id="ConfirmPassword"]'); }
+    get registerButton()         { return $('//input[@id="register-button"]'); }
+    get registerComplete()       { return $('//div[@class="result" and text()="Your registration completed"]'); }
+
+    //Validation messages
+    get firstNameError()         { return $('//span[@id="FirstName-error" and text()="First name is required."]'); }
+    get lastNameError()          { return $('//span[@id="LastName-error" and text()="Last name is required."]'); }
+    get emailError()             { return $('//span[@id="Email-error" and text()="Email is required."]'); }
+    get passwordError()          { return $('//span[@id="Password-error" and text()="Password is required."]'); }
+    get confirmPasswordError()   { return $('//span[@id="ConfirmPassword-error" and text()="Password is required."]'); }
+
+
+    //***********************************************************************************
+    /*
+     * define or overwrite page methods
+     */
 
 
     open () {
@@ -56,6 +73,24 @@ class RegisterPage extends Page {
         this.registerComplete.waitForDisplayed(10000);
         return this.registerComplete.isDisplayed();
     }
+
+
+    //***********************************************************************************
+    //Field Validation
+
+    //Check to see that all field validation messages are displayed
+    allValidationMessages() {
+        const vals = [this.firstNameError, this.lastNameError, this.emailError, this.passwordError, this.confirmPasswordError];
+        for(let i = 0; i < vals.length; i++) {
+            vals[i].waitForDisplayed(3000);
+            if (!vals[i].isDisplayed()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
 
 export default new RegisterPage()
