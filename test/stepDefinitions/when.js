@@ -155,6 +155,10 @@ When(/^I click an Xbox One sub-menu option "([^"]*)"$/, function(menuOpt) {
     videoGamesPage.selectXboxSubmenuOption(menuOpt);
 });
 
+When(/^I click a Nintendo Switch sub-menu option "([^"]*)"$/, function(menuOpt) {
+    videoGamesPage.selectSwitchSubmenuOption(menuOpt);
+});
+
 
 //Footer
 When(/^I click the "(\D+)" Information link$/, function (link) {
