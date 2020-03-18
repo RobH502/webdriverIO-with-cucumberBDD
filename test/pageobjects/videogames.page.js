@@ -34,16 +34,16 @@ class VideoGamesPage extends Page {
         }
     }
 
+    //Verifies that the user is on the correct page by checking if the correct respective header is present
+    correctHeader(header) {
+        this.videoGamesHeader.waitForDisplayed(10000);
+        return this.videoGamesHeader.getText().should.equal(header);
+    }
+
     //***********************************************************************************
     //Click the "Video Game" link
     clickLink() {
         this.videoGamesLink.click();
-    }
-
-    //Verifies that the user is on the correct page by checking if the "Video Games" header is present
-    onCorrectPage() {
-        this.videoGamesHeader.waitForDisplayed(10000);
-        return this.videoGamesHeader.getText().should.equal('Video Games');
     }
 
     //***********************************************************************************
@@ -53,13 +53,10 @@ class VideoGamesPage extends Page {
         menuOpt === "Xbox One" ? this.xboxOneLink.click() : this.nintendoSwitch.click();
     }
 
-    //Verifies that the user is on the correct page by checking if the correct respetive header is present
-    correctHeader(header) {
-        this.videoGamesHeader.waitForDisplayed(10000);
-        return this.videoGamesHeader.getText().should.equal(header);
-    }
-
     //***********************************************************************************
+    //Xbox Submenu
+
+    //Click one of the three options in the Xbox submenu
     selectXboxSubmenuOption(menuOpt) {
         this.xboxOneConsoles.moveTo();
         switch(menuOpt) {
