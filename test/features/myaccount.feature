@@ -26,21 +26,34 @@ Feature: Using the "My account" page and tabs
     #     |"My product reviews"| |"My account - My product reviews"|
 
     
-    # Scenario Outline: Add a new address
+    Scenario Outline: Add a new address
 
-    #     When I click the "Addresses" tab
-    #     And I click the "Add New" button
-    #     Then I should see the "My account - Add new address" header
-    #     And I fill out the first name, last name, and email fields <fName> <lName> <email>
-    #     And I select options from the Country field <country>
-    #     And I fill out the City and Address 1 fields <city> <address 1>
-    #     And I fill out the Zip postal code and Phone number fields <zipCode> <phoneNum>
-    #     And I click the address Save button
-    #     Then I should see the new address block and its name headers <fName> <lName>
+        When I click the "Addresses" tab
+        And I click the "Add New" button
+        Then I should see the "My account - Add new address" header
+        And I fill out the first name, last name, and email fields <fName> <lName> <email>
+        And I select options from the Country and State fields <country> <state>
+        And I fill out the City and Address 1 fields <city> <address 1>
+        And I fill out the Zip postal code and Phone number fields <zipCode> <phoneNum>
+        And I click the address Save button
+        Then I should see the new address block and its name headers <fName> <lName>
 
-    #     Examples:
-    #     |fName| |lName| |email| |city| |address 1| |zipCode| |phoneNum| |country|
-    #     |"John"| |"Wayne"| |"robert.hayes+1@auticon.us"| |"Gotham"| |"11111 Test Rd"| |"11111"| |"1111111111"| |"United States"|
+        Examples:
+        |fName| |lName| |email| |city| |address 1| |zipCode| |phoneNum| |country| |state|
+        |"John"| |"Wayne"| |"robert.hayes+4@auticon.us"| |"Gotham"| |"11111 Test Rd"| |"11111"| |"1111111111"| |"United States"| |"California"|
+
+
+
+    Scenario Outline: Delete an address
+
+        When I click the "Addresses" tab
+        And I add a new address <fName> <lName> <email> <city> <address 1> <zipCode> <phoneNum> <country> <state>
+        And I click the Delete button on an existing address and accept the alert
+        Then the address is no longer displayed on the page <fName> <lName>
+
+        Examples:
+        |fName| |lName| |email| |city| |address 1| |zipCode| |phoneNum| |country| |state|
+        |"Testing"| |"Deletion"| |"robert.hayes+4@auticon.us"| |"Gotham"| |"11111 Test Rd"| |"11111"| |"1111111111"| |"United States"| |"California"|
 
 
     # Scenario Outline: Change customer info items
