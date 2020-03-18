@@ -177,6 +177,14 @@ When(/^I click the "(\D+)" Follow us link$/, function (link) {
     footerSection.clickFollowUsLink(link);
 });
 
+When(/^I enter a valid email address into the newsletter email field "([^"]*)"$/, function(email) {
+    footerSection.enterSubscriptionEmail(email);
+})
+
+When(/^I click the "Subscribe" button under "Newsletter"$/, function() {
+    footerSection.clickSubscribe();
+})
+
 
 //*****************************************************************************************
 //Transactions
