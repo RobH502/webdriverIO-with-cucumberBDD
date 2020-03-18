@@ -32,13 +32,13 @@ class LoginPage extends Page {
     //Generic basic login function for testing the requires being logged in
     loginBasic() {
         this.open();
-        this.login('robert.hayes+1@auticon.us', 'PotterMalfoy18');
+        this.login('robert.hayes+4@auticon.us', 'PotterMalfoy22');
     }
 
     //Same as above except with parameter for password
     loginWithPassword(password) {
         this.open();
-        this.login('robert.hayes+1@auticon.us', password);
+        this.login('robert.hayes+4@auticon.us', password);
     }
 
     //Logout of an account
