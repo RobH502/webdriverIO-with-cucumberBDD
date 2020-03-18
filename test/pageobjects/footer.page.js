@@ -68,24 +68,6 @@ class Footer extends Page {
 
 
     //**********************************************************************************************
-    //Function for switching tabs
-    switchTabs() {
-        browser.getAllWindowHandles().then(function(windowHandles) {
-            browser.switchTo().window(windowHandles[1]);
-        });
-        // browser.getWindowHandle().then(function(mainWindowHandle) {
-        //     browser.getAllWindowHandles().then(function(windowHandles) {
-        //         windowHandles.forEach(function(handle) {
-        //             if (handle !== mainWindowHandle) {
-        //                 browser.switchTo().window(handle);
-        //             }
-        //         });
-        //     });
-        // });
-    }
-
-
-    //**********************************************************************************************
     //Functions for clicking footer links
 
     //Click Information links
@@ -185,6 +167,11 @@ class Footer extends Page {
     loadedFollowUsPage(url) {
         browser.switchWindow(url);
         browser.pause(4000);
+        return browser.getUrl().should.equal(url);
+    }
+
+    loadedNopComPage(url) {
+        browser.switchWindow(url);
         return browser.getUrl().should.equal(url);
     }
 
