@@ -32,6 +32,7 @@ class Footer extends Page {
     //Follow us links
     get facebookLink() { return $('//a[contains(@href, "//www.facebook.com/nopCommerce") and text()="Facebook"]'); }
     get twitterLink() { return $('//a[contains(@href, "//twitter.com/nopCommerce") and text()="Twitter"]'); }
+    get youTubeLink() { return $('//a[contains(@href, "//www.youtube.com/nopCommerce") and text()="YouTube"]'); }
 
     //nopCommerce link
     get nopCommerceLink() { return $('//a[contains(@href, "//www.nopcommerce.com") and text()="nopCommerce"]'); }
@@ -160,6 +161,8 @@ class Footer extends Page {
             case 'Twitter':
                 this.twitterLink.click();
                 break;
+            case 'YouTube':
+                this.youTubeLink.click();
         }
     }
 
