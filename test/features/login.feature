@@ -14,7 +14,7 @@ Feature: performing a login
 
         Examples:
         |email| |password|
-        |"robert.hayes+1@auticon.us"| |"PotterMalfoy18"|
+        |"robert.hayes+4@auticon.us"| |"PotterMalfoy22"|
 
 
 
