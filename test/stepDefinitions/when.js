@@ -38,13 +38,25 @@ When(/^I input a birth date "(\d+)" "([A-Za-z]+)" "(\d+)"$/, function (day, mont
     registerPage.registerDate(day, month, year);
 });
 
-When(/^I input an email and password "([^"]*)"$/, function (password) {
-    registerPage.registerEmailPassword(password);
-})
+When('I input an email address', function () {
+    registerPage.registerEmail();
+});
+
+When(/^I input a password "([^"]*)"$/, function (password) {
+    registerPage.registerPassword(password, password);
+});
+
+When(/^I input non-matching passwords "([^"]*)" "([^"]*)" into the password fields$/, function (password1, password2) {
+    registerPage.registerPassword(password1, password2);
+});
 
 When('I click the Register button', function() {
     registerPage.clickRegisterButton();
 });
+
+When(/^I input an invalid password "([^"]*)"$/, function (password) {
+    registerPage.registerPassword(password, '');
+})
 
 
 //*****************************************************************************************
