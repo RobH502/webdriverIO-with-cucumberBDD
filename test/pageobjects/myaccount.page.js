@@ -72,12 +72,15 @@ class MyAccount extends Page {
     get myProductReviews()               { return $('//*[@class="page-title"]//child::h1'); }
 
     
+    //*********************************************************************************************
     //define or overwrite page methods
 
+    //Navigate directly to the My account page
     loadMyAccountPage() {
         super.open('customer/info');
     }
 
+    //Function for clicking the sidebar tabs (specific tab specified by "tabOp" parameter)
     clickTab(tabOp) {
         switch(tabOp) {
             case 'Customer info':
@@ -162,6 +165,8 @@ class MyAccount extends Page {
         browser.pause(3000);
     }
 
+    //Fill out text and number input fields on the "Add new address" flow
+    //Field and input entry are specified by the "field" and "entry" parameters, respectively
     addressInputFields(field, entry) {
         switch(field) {
             case "First name":
@@ -188,16 +193,20 @@ class MyAccount extends Page {
         }
     }
 
+    //Select an option from the Country and State fields on the "Add new address" flow
+    //Field (Country or State) and selection are specified by the "country" and "state" parameters, respectively
     addressCountryField(country, state) {
         this.addressCountry.selectByVisibleText(country);
         this.addressWaitMsg.waitForDisplayed(3000, true);
         this.addressStateProvince.selectByVisibleText(state);
     }
 
+    //Verify that the newly added address is displayed on the address list
     addressVerifyPresent(fName, lName) {
         return $(`//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::ul[@class="info"]//child::li[@class="name" and text()="${fName} ${lName}"]`).should.exist;
     }
 
+    //Verify that an address has been deleted and is no longer displayed on the address list
     addressVerifyDeleted(fName, lName) {
         return !$(`//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::ul[@class="info"]//child::li[@class="name" and text()="${fName} ${lName}"]`).should.exist;
     }
