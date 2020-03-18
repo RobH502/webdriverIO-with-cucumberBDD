@@ -20,7 +20,7 @@ Feature: loading video games page
     Scenario: Click the Video Games link
 
         When I click the Video Games link
-        Then I see the Video Game header on the page
+        Then I see the correct header "Video Games" on the page
 
 
     Scenario Outline: Select the primary two Video Game dropdown options
