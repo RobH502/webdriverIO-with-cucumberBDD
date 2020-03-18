@@ -1,5 +1,7 @@
 import Page from './page';
 import utl from '../../utilities/common-utilities';
+const file = require('fs');
+import loginPage from './login.page';
 
 class VideoGamesPage extends Page {
 
@@ -14,7 +16,11 @@ class VideoGamesPage extends Page {
     get xboxOneAccessories()      { return $('//a[contains(@href, "/xbox-one-accessories")]'); }
 
     open() {
-        super.open('');
+        super.open('/');
+        loginPage.getCookies();
+        let rawdata = file.readFileSync('./cookies.json');
+        let cookiez = JSON.parse(rawdata);
+        browser.setCookies(cookiez);
     }
 
     //Hover over a dropdown menu option
