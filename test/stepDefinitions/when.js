@@ -197,6 +197,10 @@ When(/^I click the "Subscribe" button under "Newsletter"$/, function() {
     footerSection.clickSubscribe();
 })
 
+When('I click the "nopCommerce" link', function() {
+    footerSection.clickNopCommerceLink();
+})
+
 
 //*****************************************************************************************
 //Transactions
