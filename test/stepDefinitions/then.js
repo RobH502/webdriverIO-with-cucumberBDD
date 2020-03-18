@@ -61,6 +61,14 @@ Then(/^the page with the url "(\D+)" should load in a separate tab$/, function(u
   browser.switchWindow('https://auticontraining.azurewebsites.net/');
 });
 
+Then(/^I should see the validation error message "Enter valid email"$/, function() {
+  footerSection.emailValidation();
+})
+
+Then('I should see the validation message saying that a verification email has been sent', function() {
+  footerSection.successValidation();
+})
+
 
 //Transactions
 Then('I see a confirmation message at the top of the screen', function() {
