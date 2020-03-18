@@ -3,7 +3,7 @@ const defaultTimeoutInterval = process.env.DEBUG ? (60 * 60 * 500) : 90000;
 exports.config = {
 
     specs: [
-        './test/features/*.feature',
+      './test/features/myaccount.feature',
     ],
     // Patterns to exclude.
     exclude: [
@@ -25,7 +25,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
 
     capabilities: [
 
@@ -118,8 +118,8 @@ exports.config = {
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
     //baseUrl: 'http://localhost:8080',
-    baseUrl: 'http://www.phptravels.net',
-    waitforTimeout: 90000,            // Default timeout for all waitFor* commands.
+    baseUrl: 'https://auticontraining.azurewebsites.net/',
+    waitforTimeout: 5000,            // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 90000,    // Default timeout in milliseconds for request  if Selenium Grid doesn't send response
     connectionRetryCount: 3,          // Default request retries count
 
