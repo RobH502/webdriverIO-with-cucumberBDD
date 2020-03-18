@@ -66,6 +66,16 @@ Feature: Navigating the footer section
         #     |"YouTube"| |"https://www.youtube.com/user/nopCommerce"|
 
 
+        Scenario Outline: Clicking the "nopCommerce" link
+
+            When I click the "nopCommerce" link
+            Then the "nopCommerce" page with the url <url> should load in a separate tab
+
+            Examples:
+            |url|
+            |"https://www.nopcommerce.com/"|
+
+
         Scenario: Subscription email validation
 
             When I click the "Subscribe" button under "Newsletter"
