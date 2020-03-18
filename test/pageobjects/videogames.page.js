@@ -51,7 +51,7 @@ class VideoGamesPage extends Page {
 
     //Verifies that the user is on the correct page by checking if the correct respective header is present
     correctHeader(header) {
-        this.videoGamesHeader.waitForDisplayed(10000);
+        //this.videoGamesHeader.waitForDisplayed(10000);
         return this.videoGamesHeader.getText().should.equal(header);
     }
 
