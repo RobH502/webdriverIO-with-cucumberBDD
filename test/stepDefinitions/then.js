@@ -45,10 +45,6 @@ Then(/^the address is no longer displayed on the page "(\D+)" "(\D+)"$/, functio
 
 
 //Video Games
-Then('I see the Video Game header on the page', function() {
-  videoGamesPage.onCorrectPage();
-});
-
 Then(/^I see the correct header "([^"]*)" on the page$/, function(header) {
   videoGamesPage.correctHeader(header);
 });
