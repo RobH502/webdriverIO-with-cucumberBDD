@@ -42,14 +42,16 @@ class MyAccount extends Page {
     get addressLastName()                { return $('//input[@id="Address_LastName"]'); }
     get addressEmail()                   { return $('//input[@id="Address_Email"]'); }
     get addressCountry()                 { return $('//select[@id="Address_CountryId"]'); }
+    get addressWaitMsg()                 { return $('//span[@id="states-loading-progress"]'); }
     get addressStateProvince()           { return $('//select[@id="Address_StateProvinceId"]'); }
     get addressCity()                    { return $('//input[@id="Address_City"]'); }
     get addressAddress1()                { return $('//input[@id="Address_Address1"]'); }
     get addressZipPostalCode()           { return $('//input[@id="Address_ZipPostalCode"]'); }
     get addressPhoneNumber()             { return $('//input[@id="Address_PhoneNumber"]'); }
     get addressSaveButton()              { return $('//input[@value="Save"]'); }
-    get addressBlockHeader1()            { return $('//*[class="section-address-item"]//child::*[@class="title"]//child::strong'); }
-    get addressBlockHeader2()            { return $('//*[class="section-address-item"]//child::ul[@class="info]//child::li[@class="name"]'); }
+    get addressBlockHeader1()            { return $('//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::*[@class="title"]'); }
+    get addressBlockHeader2()            { return $('//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::ul[@class="info"]//child::li[@class="name"]'); }
+    get addressDeleteButton()            { return $('//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::*[@class="buttons"]//child::input[@value="Delete"]'); }
 
     //Orders
 
@@ -186,12 +188,24 @@ class MyAccount extends Page {
         }
     }
 
-    addressCountryField(country) {
+    addressCountryField(country, state) {
         this.addressCountry.selectByVisibleText(country);
+        this.addressWaitMsg.waitForDisplayed(3000, true);
+        this.addressStateProvince.selectByVisibleText(state);
     }
 
-    addressVerifyPart1(fName, lName) {
-        return this.addressBlockHeader1.getText().should.equal(fName + " " + lName) && this.addressBlockHeader2.getText().should.equal(fName + " " + lName);
+    addressVerifyPresent(fName, lName) {
+        return $(`//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::ul[@class="info"]//child::li[@class="name" and text()="${fName} ${lName}"]`).should.exist;
+    }
+
+    addressVerifyDeleted(fName, lName) {
+        return !$(`//*[@class="address-list"]//child::*[@class="section address-item"][last()]//child::ul[@class="info"]//child::li[@class="name" and text()="${fName} ${lName}"]`).should.exist;
+    }
+
+    //Delete the last address listed
+    addressDelete() {
+            browser.acceptAlert();
+            this.addressDeleteButton.click();
     }
 
 
