@@ -131,10 +131,6 @@ When('I click the Delete button on an existing address and accept the alert', fu
     myAccountPage.addressDelete();
 });
 
-// When('I click OK on the popup modal', function() {
-//     myAccountPage.addressDelete();
-// });
-
 
 //*****************************************************************************************
 //Video Games
