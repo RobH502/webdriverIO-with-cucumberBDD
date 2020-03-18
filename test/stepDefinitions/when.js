@@ -114,13 +114,17 @@ When(/^I fill out the Zip postal code and Phone number fields "(\d+)" "(\d+)"$/,
 
 
 //Delete Address
-When(/^I add a new address <fName> <lName> <email> <city> <address 1> <zipCode> <phoneNum> <country> <state>$/, function(fName, lName, email, city, address, zipCode, phoneNum, country, state) {
+When(/^I add a new address "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "(\d+)" "(\d+)" "(\D+)" "(\D+)"$/, function(fName, lName, email, city, address, zip, phone, country, state) {
+    myAccountPage.clickButton("Add New");
     myAccountPage.addressInputFields("First name", fName);
     myAccountPage.addressInputFields("Last name", lName);
     myAccountPage.addressInputFields("Email", email);
     myAccountPage.addressCountryField(country, state);
     myAccountPage.addressInputFields("City", city);
     myAccountPage.addressInputFields("Address 1", address);
+    myAccountPage.addressInputFields("Zip / postal code", zip);
+    myAccountPage.addressInputFields("Phone number", phone);
+    myAccountPage.saveAddress();
 })
 
 When('I click the Delete button on an existing address and accept the alert', function() {
