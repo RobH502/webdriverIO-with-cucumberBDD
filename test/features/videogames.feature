@@ -8,6 +8,15 @@ Feature: loading video games page
 
         Given I am on the homepage
 
+    Scenario Outline: Login to the site
+        When I go to the login page
+        When I login with email and password <email> <password> into the text box
+        Then I should see the logout link
+
+        Examples:
+        |email| |password|
+        |"robert.hayes+4@auticon.us"| |"PotterMalfoy22"|
+
     Scenario: Click the Video Games link
 
         When I click the Video Games link
