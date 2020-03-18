@@ -29,6 +29,14 @@ Then('I should see validation messages for all of the required fields', function
   registerPage.allValidationMessages();
 });
 
+Then('I should see a validation message saying that the two passwords do not match', function() {
+  registerPage.noMatchMessage();
+})
+
+Then('I should see a validation message saying that the entered password is invalid', function() {
+  registerPage.invalidPasswordMessage();
+})
+
 
 //My Account page
 Then(/^I see the newly edited info retained in the Customer info fields "([^"]*)" "([^"]*)" "([^"]*)"$/, function (gender, fName, lName) {
