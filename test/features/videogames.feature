@@ -47,3 +47,17 @@ Feature: loading video games page
         |"Xbox One Consoles"|
         |"Xbox One Games"|
         |"Xbox One Accessories"|
+
+    
+    Scenario Outline: Select each option in the Nintendo Switch sub-menu
+
+        When I hover over the "Video Games" option
+        And I hover over the "Nintendo Switch" option
+        And I click a Nintendo Switch sub-menu option <menuOpt>
+        Then I see the correct header <menuOpt> on the page
+
+        Examples:
+        |menuOpt|
+        |"Nintendo Switch Consoles"|
+        |"Nintendo Switch Games"|
+        |"Nintendo Switch Accessories"|
