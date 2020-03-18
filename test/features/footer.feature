@@ -91,3 +91,11 @@ Feature: Navigating the footer section
             Examples:
             |email|
             |"robert.hayes+4@auticon.us"|
+
+
+        Scenario: Verify that the footer copyright disclaimer is displayed
+
+            When I am on the homepage of the site
+            Then the copyright disclaimer is displayed in the footer
+            When I click the Log out button
+            Then the copyright disclaimer is displayed in the footer
