@@ -7,25 +7,28 @@ class RegisterPage extends Page {
      * define elements
      */
 
-    get maleRadio()              { return $('//input[@id="gender-male"]'); }
-    get femaleRadio()            { return $('//input[@id="gender-female"]'); }
-    get firstName()              { return $('//input[@id="FirstName"]'); }
-    get lastName()               { return $('//input[@id="LastName"]'); }
-    get bdDay()                  { return $('//select[@name="DateOfBirthDay"]'); }
-    get bdMonth()                { return $('//select[@name="DateOfBirthMonth"]'); }
-    get bdYear()                 { return $('//select[@name="DateOfBirthYear"]'); }
-    get email()                  { return $('//input[@id="Email"]'); }
-    get password()               { return $('//input[@id="Password"]'); }
-    get confirmPassword()        { return $('//input[@id="ConfirmPassword"]'); }
-    get registerButton()         { return $('//input[@id="register-button"]'); }
-    get registerComplete()       { return $('//div[@class="result" and text()="Your registration completed"]'); }
+    get maleRadio()                { return $('//input[@id="gender-male"]'); }
+    get femaleRadio()              { return $('//input[@id="gender-female"]'); }
+    get firstName()                { return $('//input[@id="FirstName"]'); }
+    get lastName()                 { return $('//input[@id="LastName"]'); }
+    get bdDay()                    { return $('//select[@name="DateOfBirthDay"]'); }
+    get bdMonth()                  { return $('//select[@name="DateOfBirthMonth"]'); }
+    get bdYear()                   { return $('//select[@name="DateOfBirthYear"]'); }
+    get email()                    { return $('//input[@id="Email"]'); }
+    get password()                 { return $('//input[@id="Password"]'); }
+    get confirmPassword()          { return $('//input[@id="ConfirmPassword"]'); }
+    get registerButton()           { return $('//input[@id="register-button"]'); }
+    get registerComplete()         { return $('//div[@class="result" and text()="Your registration completed"]'); }
 
     //Validation messages
-    get firstNameError()         { return $('//span[@id="FirstName-error" and text()="First name is required."]'); }
-    get lastNameError()          { return $('//span[@id="LastName-error" and text()="Last name is required."]'); }
-    get emailError()             { return $('//span[@id="Email-error" and text()="Email is required."]'); }
-    get passwordError()          { return $('//span[@id="Password-error" and text()="Password is required."]'); }
-    get confirmPasswordError()   { return $('//span[@id="ConfirmPassword-error" and text()="Password is required."]'); }
+    get firstNameError()           { return $('//span[@id="FirstName-error" and text()="First name is required."]'); }
+    get lastNameError()            { return $('//span[@id="LastName-error" and text()="Last name is required."]'); }
+    get emailError()               { return $('//span[@id="Email-error" and text()="Email is required."]'); }
+    get passwordError()            { return $('//span[@id="Password-error" and text()="Password is required."]'); }
+    get confirmPasswordError()     { return $('//span[@id="ConfirmPassword-error" and text()="Password is required."]'); }
+    get nonMatchPasswordError()    { return $('//span[@id="ConfirmPassword-error" and contains(text(), "do not match")]'); }
+    get invalidPasswordErrorP1()   { return $('//span[@id="Password-error"]//child::p[text()="must meet the following rules: "]'); }
+    get invalidPasswordErrorP2()   { return $('//span[@id="Password-error"]//child::ul//child::li[text()="must have at least 6 characters"]'); }
 
 
     //***********************************************************************************
@@ -57,10 +60,13 @@ class RegisterPage extends Page {
     }
 
     //Fills out the email field (with randomly generated email) and the two password fields
-    registerEmailPassword(password) {
+    registerEmail() {
         this.email.setValue(utl.generateEmail());
-        this.password.setValue(password);
-        this.confirmPassword.setValue(password);
+    }
+
+    registerPassword(password1, password2) {
+        this.password.setValue(password1);
+        this.confirmPassword.setValue(password2);
     }
 
     //Click the "Register" button on the page to complete the registration flow
@@ -89,6 +95,17 @@ class RegisterPage extends Page {
         }
 
         return true;
+    }
+
+    //Check to see that the correct validation message appears upon entering two non-matching passwords
+    noMatchMessage() {
+        this.nonMatchPasswordError.waitForDisplayed(3000);
+        return this.nonMatchPasswordError.isDisplayed().should.be.true;
+    }
+
+    invalidPasswordMessage() {
+        this.invalidPasswordErrorP1.waitForDisplayed(3000);
+        return this.invalidPasswordErrorP1.isDisplayed().should.be.true && this.invalidPasswordErrorP2.isDisplayed().should.be.true;
     }
 
 }
