@@ -59,3 +59,4 @@ Feature: Navigating the footer section
         |link| |url|
         |"Facebook"| |"https://www.facebook.com/nopCommerce"|
         |"Twitter"| |"https://twitter.com/nopCommerce"|
+        |"YouTube"| |"https://www.youtube.com/user/nopCommerce"|
