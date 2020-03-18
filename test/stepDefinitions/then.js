@@ -25,6 +25,10 @@ Then(/^I should see "([^"]*)"$/, function(message) {
   registerPage.isRegisterComplete().should.be.true;
 });
 
+Then('I should see validation messages for all of the required fields', function() {
+  registerPage.allValidationMessages();
+});
+
 
 //My Account page
 Then(/^I see the newly edited info retained in the Customer info fields "([^"]*)" "([^"]*)" "([^"]*)"$/, function (gender, fName, lName) {
