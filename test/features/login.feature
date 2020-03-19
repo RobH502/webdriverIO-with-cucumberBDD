@@ -27,26 +27,48 @@ Feature: performing a login
     #     And I should see the Login link on the page
 
 
-    Scenario Outline: Invalid email validation
+    # Scenario Outline: Invalid email validation
 
-        When I enter an invalid email <email>
-        And I move the cursor focus away from the email field
-        Then I should see the validation error message "Wrong email"
+    #     When I enter an invalid email <email>
+    #     And I move the cursor focus away from the email field
+    #     Then I should see the validation error message "Wrong email"
+
+    #     Examples:
+    #     |email|
+    #     |"robert.hayes+4auticonus"|
+    #     |"robert.hayes+4auticon.us"|
+
+    
+    # Scenario Outline: Leaving fields blank
+
+    #     When I leave either or both of the email and password fields blank <email> <password>
+    #     And I click on the "Login" button
+    #     Then I should see the appropriate validation error message displayed <email> <password>
+
+    #     Examples:
+    #     |email| |password|
+    #     |""| |""|
+    #     |"robert.hayes+4@auticon.us"| |""|
+    #     |""| |"PotterMalfoy22"|
+
+
+    Scenario Outline: Logging into non-existing account
+
+        When I enter an email <email> for a non-existing account
+        And I click on the "Login" button
+        Then I should see a validation error message saying that no account was found
 
         Examples:
         |email|
-        |"robert.hayes+4auticonus"|
-        |"robert.hayes+4auticon.us"|
+        |"robert.hayes+1001@auticon.us"|
 
     
-    Scenario Outline: Leaving fields blank
+    Scenario Outline: Logging in with incorrect password
 
-        When I leave either or both of the email and password fields blank <email> <password>
+        When I anter a valid email <email> with the wrong password <password>
         And I click on the "Login" button
-        Then I should see the appropriate validation error message displayed <email> <password>
+        Then I should see a validation error message saying that the credentials are not correct
 
         Examples:
         |email| |password|
-        # |""| |""|
-        |"robert.hayes+4@auticon.us"| |""|
-        # |""| |"PotterMalfoy22"|
+        |"rebert.hayes+4@auticon.us"| |"Test1234"|
