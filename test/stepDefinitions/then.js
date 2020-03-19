@@ -85,6 +85,10 @@ Then(/^the "nopCommerce" page with the url "([^"]*)" should load in a separate t
   footerSection.loadedNopComPage(url);
 });
 
+Then('the copyright disclaimer is displayed in the footer', function() {
+  footerSection.disclaimerDisplayed();
+})
+
 
 //Transactions
 Then('I see a confirmation message at the top of the screen', function() {
