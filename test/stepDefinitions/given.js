@@ -14,7 +14,7 @@ Given('I am logged in', function() {
 //Generic function to access the homepage
 Given('I am on the site homepage', function() {
   footerSection.loadHomepage();
-})
+});
 
 //Login page
 Given('I am on the login page', function() {
