@@ -4,7 +4,7 @@ import registerPage from '../pageobjects/registration.page';
 import myAccountPage from '../pageobjects/myaccount.page';
 import videoGamesPage from '../pageobjects/videogames.page';
 import footerSection from '../pageobjects/footer.page';
-import transactionsPage from '../pageobjects/transactions.page';
+import transactionsPage from '../pageobjects/shoppingcart.page';
 
 
 //Login

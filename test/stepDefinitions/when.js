@@ -4,7 +4,7 @@ import registerPage from '../pageobjects/registration.page';
 import myAccountPage from '../pageobjects/myaccount.page';
 import videoGamesPage from '../pageobjects/videogames.page';
 import footerSection from '../pageobjects/footer.page';
-import transactions from '../pageobjects/transactions.page';
+import transactions from '../pageobjects/shoppingcart.page';
 
 
 //Generic basic login function for testing that requires being logged in
