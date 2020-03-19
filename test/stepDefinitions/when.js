@@ -12,6 +12,11 @@ When('I login to the site', function() {
     loginPage.loginBasic();
 });
 
+//Generic function to access the homepage
+When('I am on the homepage of the site', function() {
+    footerSection.loadHomepage();
+});
+
 
 //*****************************************************************************************
 //Login
