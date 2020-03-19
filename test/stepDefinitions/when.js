@@ -44,6 +44,14 @@ When(/^I leave either or both of the email and password fields blank "([^"]*)" "
     loginPage.login(email, password);
 });
 
+When(/^I enter an email "([^"]*)" for a non-existing account$/, function(email) {
+    loginPage.login(email, 'Test1234');
+});
+
+When(/^I anter a valid email "([^"]*)" with the wrong password "([^"]*)"$/, function(email, password) {
+    loginPage.login(email, password);
+});
+
 
 //*****************************************************************************************
 //Registration

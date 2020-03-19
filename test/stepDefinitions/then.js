@@ -26,6 +26,14 @@ Then('I should see the validation error message "Wrong email"', function() {
 
 Then(/^I should see the appropriate validation error message displayed "([^"]*)" "([^"]*)"$/, function(email, password) {
   loginPage.blankFieldsMessages(email, password);
+});
+
+Then('I should see a validation error message saying that no account was found', function() {
+  loginPage.failedLoginMessage('noAccount');
+})
+
+Then('I should see a validation error message saying that the credentials are not correct', function() {
+  loginPage.failedLoginMessage('wrongCreds');
 })
 
 
