@@ -45,7 +45,7 @@ class Footer extends Page {
     get nopCommerceLink()            { return $('//a[contains(@href, "//www.nopcommerce.com") and text()="nopCommerce"]'); }
 
     //Footer disclaimer
-    get footerDisclaimer()           { return $('//*[@class="footer-disclaimer"]'); }
+    get footerDisclaimer()           { return $('//*[@class="footer-disclaimer" and contains(text(), "Copyright")]'); }
 
 
     //**********************************************************************************************
