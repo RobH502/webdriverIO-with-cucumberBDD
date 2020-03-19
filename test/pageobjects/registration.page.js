@@ -29,6 +29,8 @@ class RegisterPage extends Page {
     get nonMatchPasswordError()    { return $('//span[@id="ConfirmPassword-error" and contains(text(), "do not match")]'); }
     get invalidPasswordErrorP1()   { return $('//span[@id="Password-error"]//child::p[text()="must meet the following rules: "]'); }
     get invalidPasswordErrorP2()   { return $('//span[@id="Password-error"]//child::ul//child::li[text()="must have at least 6 characters"]'); }
+    get invalidEmailError()        { return $('//span[text()="Wrong email"]'); }
+    get existingEmailError()       { return $('//*[@class="message-error validation-summary-errors"]//child::ul//child::li[text()="The specified email already exists"]'); }
 
 
     //***********************************************************************************
@@ -41,7 +43,7 @@ class RegisterPage extends Page {
         super.open('register');
     }
 
-    //Clicks the male or female radio button, depending on the string argument ("male" or "femail") passed in through the "gender" parameter
+    //Clicks the male or female radio button, depending on the string argument ("male" or "female") passed in through the "gender" parameter
     registerGender (gender) {
         gender === "male" ? this.maleRadio.click() : this.femaleRadio.click();
     }
@@ -64,9 +66,20 @@ class RegisterPage extends Page {
         this.email.setValue(utl.generateEmail());
     }
 
+    //Fills out the "Password" and "Confirm password" with the "password1" and "password2" parameters, respectively
     registerPassword(password1, password2) {
         this.password.setValue(password1);
         this.confirmPassword.setValue(password2);
+    }
+
+    //Enter a previously existing email address into the "Email" field
+    enterExistingEmail() {
+        this.email.setValue('robert.hayes+4@auticon.us');
+    }
+
+    //Enter an invalid email address into the "Email" field
+    enterInvalidEmail(email) {
+        this.email.setValue(email);
     }
 
     //Click the "Register" button on the page to complete the registration flow
@@ -103,9 +116,21 @@ class RegisterPage extends Page {
         return this.nonMatchPasswordError.isDisplayed().should.be.true;
     }
 
+    //Verify that the correct error message appears for an invalid password
     invalidPasswordMessage() {
         this.invalidPasswordErrorP1.waitForDisplayed(3000);
         return this.invalidPasswordErrorP1.isDisplayed().should.be.true && this.invalidPasswordErrorP2.isDisplayed().should.be.true;
+    }
+
+    //Verify that the correct error message appears for a previously existing email address
+    existingEmailMessage() {
+        this.existingEmailError.waitForDisplayed(3000);
+        return this.existingEmailError.isDisplayed().should.be.true;
+    }
+
+    //Verify that the correct error message appears for an invalid email address
+    invalidEmailMessage() {
+        return this.invalidEmailError.isDisplayed().should.be.true;
     }
 
 }

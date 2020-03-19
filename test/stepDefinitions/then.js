@@ -18,7 +18,7 @@ Then('I should not see the Log out link on the page', function() {
 
 Then('I should see the Login link on the page', function() {
   loginPage.isLoginShowing().should.be.true;
-})
+});
 
 //Register
 Then(/^I should see "([^"]*)"$/, function(message) {
@@ -31,10 +31,18 @@ Then('I should see validation messages for all of the required fields', function
 
 Then('I should see a validation message saying that the two passwords do not match', function() {
   registerPage.noMatchMessage();
-})
+});
 
 Then('I should see a validation message saying that the entered password is invalid', function() {
   registerPage.invalidPasswordMessage();
+});
+
+Then('I should see a validation message saying "The specified email already exists"', function() {
+  registerPage.existingEmailMessage();
+});
+
+Then('I should see a validation message saying "Wrong email"', function() {
+  registerPage.invalidEmailMessage();
 })
 
 

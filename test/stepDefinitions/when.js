@@ -61,7 +61,15 @@ When('I click the Register button', function() {
 
 When(/^I input an invalid password "([^"]*)"$/, function (password) {
     registerPage.registerPassword(password, '');
-})
+});
+
+When('I input an existing email address', function() {
+    registerPage.enterExistingEmail();
+});
+
+When(/^I input an invalid email address "([^"]*)"$/, function (email) {
+    registerPage.enterInvalidEmail(email);
+});
 
 
 //*****************************************************************************************
