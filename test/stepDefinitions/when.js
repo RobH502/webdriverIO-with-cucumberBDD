@@ -24,8 +24,24 @@ When(/^I login with email and password "([^"]*)" "([^"]*)" into the text box$/, 
     loginPage.login(arg1, arg2);  // entering email, password and submitting the page
 });
 
+When('I click on the "Login" button', function() {
+    loginPage.clickLoginButton();
+});
+
 When('I click the Log out button', function() {
     loginPage.logout();
+});
+
+When(/^I enter an invalid email "([^"]*)"$/, function(email) {
+    loginPage.enterBadEmail(email);
+});
+
+When('I move the cursor focus away from the email field', function() {
+    loginPage.clickPasswordField();
+});
+
+When(/^I leave either or both of the email and password fields blank "([^"]*)" "([^"]*)"$/, function (email, password) {
+    loginPage.login(email, password);
 });
 
 

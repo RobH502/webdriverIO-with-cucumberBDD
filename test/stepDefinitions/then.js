@@ -20,6 +20,15 @@ Then('I should see the Login link on the page', function() {
   loginPage.isLoginShowing().should.be.true;
 });
 
+Then('I should see the validation error message "Wrong email"', function() {
+  loginPage.invalidEmailMessage();
+});
+
+Then(/^I should see the appropriate validation error message displayed "([^"]*)" "([^"]*)"$/, function(email, password) {
+  loginPage.blankFieldsMessages(email, password);
+})
+
+
 //Register
 Then(/^I should see "([^"]*)"$/, function(message) {
   registerPage.isRegisterComplete().should.be.true;
