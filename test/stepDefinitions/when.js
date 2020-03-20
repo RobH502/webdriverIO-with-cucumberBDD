@@ -5,6 +5,7 @@ import myAccountPage from '../pageobjects/myaccount.page';
 import videoGamesPage from '../pageobjects/videogames.page';
 import footerSection from '../pageobjects/footer.page';
 import transactions from '../pageobjects/shoppingcart.page';
+import wishlist from '../pageobjects/wishlist.page';
 
 
 //Generic basic login function for testing that requires being logged in
@@ -115,6 +116,7 @@ When(/^I click the "([^"]*)" radio option$/, function(gender) {
 });
 
 
+//**************************************************************************************************
 //Change password
 When(/^I see the message "(\D+)"$/, function (message) {
     myAccountPage.passwordChangedShown(message);
@@ -133,6 +135,7 @@ When(/^I edit the entry in the "([^"]*)" field "([^"]*)"$/, function (field, nam
 });
 
 
+//**************************************************************************************************
 //New Address
 When('I click the address Save button', function() {
     myAccountPage.saveAddress();
@@ -162,6 +165,7 @@ When(/^I fill out the Zip postal code and Phone number fields "(\d+)" "(\d+)"$/,
 });
 
 
+//**************************************************************************************************
 //Delete Address
 When(/^I add a new address "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)" "(\d+)" "(\d+)" "(\D+)" "(\D+)"$/, function(fName, lName, email, city, address, zip, phone, country, state) {
     myAccountPage.clickButton("Add New");
@@ -209,6 +213,7 @@ When(/^I click a Nintendo Switch sub-menu option "([^"]*)"$/, function(menuOpt) 
 });
 
 
+//**************************************************************************************************
 //Footer
 When(/^I click the "(\D+)" Information link$/, function (link) {
     footerSection.clickInformationLink(link);
@@ -240,7 +245,7 @@ When('I click the "nopCommerce" link', function() {
 
 
 //*****************************************************************************************
-//Transactions
+//Shopping Cart
 
 When('I load the video games page', function() {
     transactions.open();
@@ -260,4 +265,28 @@ When('I complete the checkout flow', function() {
 
 When('I go to the Orders tab in My account', function() {
     transactions.ordersTab();
+});
+
+
+//**************************************************************************************************
+//Wishlist
+
+When('I load the wishlist', function() {
+    wishlist.open();
+});
+
+When('I click the heart button of a product', function() {
+    wishlist.addItemToWishlist();
+});
+
+When('I click the wishlist link in the success message', function() {
+    wishlist.successMessageLink();
+});
+
+When('I click the Update Wishlist button', function() {
+    wishlist.clickUpdateButton();
+});
+
+When('I click the Add to Cart button', function() {
+    wishlist.clickAddToCartButton();
 });

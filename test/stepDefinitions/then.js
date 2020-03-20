@@ -5,6 +5,7 @@ import myAccountPage from '../pageobjects/myaccount.page';
 import videoGamesPage from '../pageobjects/videogames.page';
 import footerSection from '../pageobjects/footer.page';
 import transactionsPage from '../pageobjects/shoppingcart.page';
+import wishlist from '../pageobjects/wishlist.page';
 
 
 //Login
@@ -126,4 +127,28 @@ Then('I see a popup message saying Out of stock at the top of the screen', funct
 
 Then('I should see the order displayed with status pending', function() {
   transactionsPage.transactionVerification();
+});
+
+Then('the item is not displayed on the shopping cart page', function() {
+  transactionsPage.verifyItemNotPresent();
+})
+
+
+//**************************************************************************************************
+//Wishlist
+
+Then('I should see a message saying "The wishlist is empty!"', function() {
+  wishlist.verifyEmptyList();
+});
+
+Then('the product should be displayed on the wishlist', function() {
+  wishlist.itemAddedVerify();
+});
+
+Then('a green notification bar appears saying "The product has been added to your wishlist"', function() {
+  wishlist.verifySuccessMessage();
+});
+
+Then('the wishlist item is still present', function() {
+  wishlist.itemAddedVerify();
 });
