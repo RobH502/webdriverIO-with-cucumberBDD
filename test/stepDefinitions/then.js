@@ -159,4 +159,29 @@ Then('the wishlist item is still present', function() {
 
 Then('the item should no longer be displayed on the wishlist', function() {
   wishlist.itemGoneVerify();
+});
+
+Then(/^the quantity of the item retains the new value "(\d+)"$/, function(newVal) {
+  wishlist.verifyQuantityChange(newVal);
+});
+
+Then('I should see a validation error message saying "Enter friend\'s email"', function() {
+  wishlist.verifyEnterEmailMessage('friend');
+});
+
+Then('I should see a validation error message saying "Wrong email" for the friend email', function() {
+  wishlist.verifyWrongEmailMessage('friend');
+});
+
+Then('I should see a validation error message saying "Enter your email"', function() {
+  wishlist.verifyEnterEmailMessage('personal');
+});
+
+Then('I should see a validation error message saying "Wrong email" for the personal email', function() {
+  wishlist.verifyWrongEmailMessage('personal');
+});
+
+Then('I should see a message saying "Your message has been sent."', function() {
+  browser.pause(5000);
+  wishlist.verifyEmailSuccessMessage();
 })

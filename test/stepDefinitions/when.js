@@ -293,4 +293,40 @@ When('I click the Add to Cart button', function() {
 
 When(/^I click the "(\D+)" checkbox of the listed item$/, function(checkBox) {
     wishlist.clickCheckbox(checkBox);
-})
+});
+
+When(/^I change the value of the list item's quantity "(\d+)"$/, function(newVal) {
+    wishlist.changeQuantity(newVal);
+});
+
+When('I click the Email a Friend button', function() {
+    wishlist.clickEmailFriendButton();
+});
+
+When('I click the Send Email button', function() {
+    wishlist.clickSendEmailButton();
+});
+
+When(/^I enter an invalid friend email address "([^"]*)"$/, function(email) {
+    wishlist.enterFriendEmail(email);
+});
+
+When(/^I enter a valid friend email address "([^"]*)"$/, function(email) {
+    wishlist.enterFriendEmail(email);
+});
+
+When(/^I enter an invalid personal email address "([^"]*)"$/, function(email) {
+    wishlist.enterYourEmail(email);
+});
+
+When(/^I enter a valid personal email address "([^"]*)"$/, function(email) {
+    wishlist.enterYourEmail(email);
+});
+
+When(/^I enter a valid personal message "([^"]*)"$/, function(message) {
+    wishlist.enterPersonalMessage(message);
+});
+
+When(/^I clear the Your email address field$/, function() {
+    wishlist.clearYourEmail();
+});
