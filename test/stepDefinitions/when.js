@@ -290,3 +290,7 @@ When('I click the Update Wishlist button', function() {
 When('I click the Add to Cart button', function() {
     wishlist.clickAddToCartButton();
 });
+
+When(/^I click the "(\D+)" checkbox of the listed item$/, function(checkBox) {
+    wishlist.clickCheckbox(checkBox);
+})

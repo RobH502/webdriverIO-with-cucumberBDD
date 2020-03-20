@@ -141,7 +141,7 @@ class Transactions extends Page {
 
     //Verify that the item from the wishlist was not added to that cart
     verifyItemNotPresent() {
-        return !this.cartItem.isDisplayed();
+        return this.cartItem.isDisplayed().should.be.false;
     }
 
 }

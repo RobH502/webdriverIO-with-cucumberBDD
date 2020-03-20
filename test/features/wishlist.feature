@@ -36,13 +36,16 @@ Feature: Using the Wishlist page
             And I click the Add to Cart button
             Then the wishlist item is still present
             When I go to my shopping cart
-            Then the item is not displayed on the shopping cart page
+            Then the item should not be displayed on the shopping cart page
 
 
+        Scenario: Add wishlist item to cart
 
-
-
-
-            # And I click the "Add to cart" checkbox of the listed item
+            When I load the wishlist
+            And I click the "Add to cart" checkbox of the listed item
+            And I click the Add to Cart button
+            Then the item should be displayed on the shopping cart page
+            When I load the wishlist
+            Then the item should no longer be displayed on the wishlist
             
         

@@ -129,9 +129,13 @@ Then('I should see the order displayed with status pending', function() {
   transactionsPage.transactionVerification();
 });
 
-Then('the item is not displayed on the shopping cart page', function() {
-  transactionsPage.verifyItemNotPresent();
+Then('the item should be displayed on the shopping cart page', function() {
+  transactionsPage.verifyItemPresent();
 })
+
+Then('the item should not be displayed on the shopping cart page', function() {
+  transactionsPage.verifyItemNotPresent();
+});
 
 
 //**************************************************************************************************
@@ -152,3 +156,7 @@ Then('a green notification bar appears saying "The product has been added to you
 Then('the wishlist item is still present', function() {
   wishlist.itemAddedVerify();
 });
+
+Then('the item should no longer be displayed on the wishlist', function() {
+  wishlist.itemGoneVerify();
+})
