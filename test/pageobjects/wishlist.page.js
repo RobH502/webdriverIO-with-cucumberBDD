@@ -25,6 +25,17 @@ class Wishlist extends Page {
 
     get shareLink()              { return $('//a[@class="share-link"]'); }
 
+    //Send Email to Friend
+    get friendEmailField()       { return $('//input[@id="FriendEmail"]'); }
+    get yourEmailField()         { return $('//input[@id="YourEmailAddress"]'); }
+    get personalMessageField()   { return $('//input[@id="PersonalMessage"]'); }
+    get sendEmailButton()        { return $('//input[@name="send-email" and @value="Send email"]'); }
+    get enterFriendEmailError()  { return $('//span[@id="FriendEmail-error" and text()="Enter friend\'s email"]'); }
+    get wrongFriendEmailError()  { return $('//span[@id="FriendEmail-error" and text()="Wrong email"]'); }
+    get enterYourEmailError()    { return $('//span[@id="YourEmailAddress-error" and contains(text(), "Enter your email")]'); }
+    get wrongYourEmailError()    { return $('//span[@id="YourEmailAddress-error" and text()="Wrong email"]'); }
+    get emailSuccessMessage()    { return $('//div[@class="result" and contains(text(), "Your message has been sent.")]'); }
+
     /*
     * define or overwrite page methods
     */
@@ -45,40 +56,76 @@ class Wishlist extends Page {
     }
 
     //Change quantity of wishlist
-    changeQuantity() {
+    changeQuantity(newVal) {
         this.quantityField.clearValue();
-        this.quantityField.setValue('2');
+        this.quantityField.setValue(newVal);
     }
 
     //Remove item from wishlist
-    clickRemoveCheckbox() {
-        this.removeCheckbox.click();
+    clickCheckbox(checkBox) {
+        checkBox === "Remove" ? this.removeCheckbox.click() : this.addToCartCheckbox.click();
     }
 
     clickUpdateButton() {
         this.updateWishlistButton.click();
     }
 
-    clickAddToCartCheckbox() {
-        this.addToCartCheckbox.click();
-    }
-
     clickAddToCartButton() {
         this.addToCartButton.click();
-    }
-
-    clickEmailFriendButton() {
-        this.emailAFriendButton.click();
     }
 
     wishlistItemProductPage() {
         this.wishlistItem.click();
     }
 
+
+    //******************************************************************************
+    //Friend Email page functions
+
+    //click the "Email a Friend" button
+    clickEmailFriendButton() {
+        this.emailAFriendButton.click();
+    }
+
+    //Click the "Send Email" button
+    clickSendEmailButton() {
+        this.sendEmailButton.click();
+    }
+
+    //Enter a friend's email address
+    enterFriendEmail(email) {
+        this.friendEmailField.setValue(email);
+    }
+
+    //Enter your email address
+    enterYourEmail(email) {
+        this.yourEmailField.clearValue();
+        this.yourEmailField.setValue(email);
+    }
+
+    clearYourEmail(email) {
+        this.yourEmailField.clearValue();
+    }
+
+    //Enter a personal message
+    enterPersonalMessage(message) {
+        this.personalMessageField.setValue(message);
+    }
+
+    //******************************************************************************
+    //Verification functions
+
     //Verify that the added item is indeed displayed on the wishlist
     itemAddedVerify() {
         this.wishlistItem.waitForDisplayed(3000);
         return this.wishlistItem.isDisplayed().should.be.true;
+    }
+
+    //Verify that the wishlist item is no longer displayed on the list
+    //Verify this after the item has been removed or added to the cart
+    itemGoneVerify() {
+        this.wishlistItem.waitForDisplayed(3000, true);
+        return this.wishlistItem.isDisplayed().should.be.false;
     }
 
     //Verify that an empty wishlist displays the appropriate message instead
@@ -91,6 +138,43 @@ class Wishlist extends Page {
         this.wishlistAddSuccess.waitForDisplayed(3000);
         return this.wishlistAddSuccess.isDisplayed().should.be.true;
     }
+
+    //Verify that the item's quantity value has changed to the value specified by the "newVal" parameter
+    verifyQuantityChange(newVal) {
+        this.quantityField.waitForDisplayed(3000);
+        return Number(this.quantityField.getAttribute('value')).should.equal(newVal);
+    }
+
+    //Verify that the correct validation error message appears upon clicking "Send Email" without
+    //entering an email address
+    verifyEnterEmailMessage(field) {
+        if (field === "friend") {
+            this.enterFriendEmailError.waitForDisplayed(3000);
+            return this.enterFriendEmailError.isDisplayed().should.be.true;
+        } else {
+            this.enterYourEmailError.waitForDisplayed(3000);
+            return this.enterYourEmailError.isDisplayed().should.be.true;
+        }
+    }
+
+    //Same as above, except for entering an invalid email address
+    verifyWrongEmailMessage(field) {
+        if (field === "friend") {
+            this.wrongFriendEmailError.waitForDisplayed(3000);
+            return this.wrongFriendEmailError.isDisplayed().should.be.true;
+        } else {
+            this.wrongYourEmailError.waitForDisplayed(3000);
+            return this.wrongYourEmailError.isDisplayed().should.be.true;
+        }
+    }
+
+    //Verify that the correct message appears after successfully emailing a friend
+    verifyEmailSuccessMessage() {
+        this.emailSuccessMessage.waitForDisplayed(3000);
+        return this.emailSuccessMessage.isDisplayed().should.be.true;
+    }
+
+    //Verify that 
 }
 
 export default new Wishlist();

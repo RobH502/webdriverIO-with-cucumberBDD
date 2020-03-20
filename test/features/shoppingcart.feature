@@ -7,19 +7,29 @@ Feature: Making a transaction
     Background:
 
         Given I am logged in
+        And the shopping cart is empty
 
         Scenario Outline: Attempt to purchase an out of stock item
         
-        When I load the video games page
-        And I attempt to add an item <item> to the shopping cart
-        Then I see a popup message saying Out of stock at the top of the screen
+            When I load the video games page
+            And I attempt to add an item <item> to the shopping cart
+            Then I see a popup message saying Out of stock at the top of the screen
 
         Examples:
         |item|
         |"Animal Crossing"|
 
 
-        # Scenario Outline: Purchasing a video game
+        Scenario: Add an item to the shopping cart
+
+            When i load the video games page
+            And I attempt to add an item <item> to the shopping cart
+            Then I should see a popup message saying that the item was added to the cart
+            When I load the shopping cart
+            Then I should see the item on the shopping cart page
+
+
+        # Scenario Outline: Purchasing an item
 
         # When I load the video games page
         # And I attempt to add an item <item> to the shopping cart

@@ -44,6 +44,7 @@ class LoginPage extends Page {
     loginBasic() {
         this.open();
         this.login('robert.hayes+4@auticon.us', 'PotterMalfoy22');
+        this.clickLoginButton();
     }
 
     //Same as above except with parameter for password
