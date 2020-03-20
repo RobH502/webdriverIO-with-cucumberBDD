@@ -8,8 +8,7 @@ class Wishlist extends Page {
 
     get wishlistLink()           { return $('//a[contains(@href, "/wishlist")]'); }
 
-    get wishlistItem()           { return $('tr//child::td[@class="product"]//child::a[@class="product-name"]'); }
-    get wishlistItemLink()       { return $('a[contains(@href, "/marvels-avengers-xbox-one")]'); }
+    get wishlistItem()           { return $('tr//child::td[@class="product"]//child::a[@class="product-name" contains(@href, "/marvels-avengers-xbox-one")]'); }
     get removeCheckbox()         { return $('input[@type="checkbox" and @name="removefromcart"]'); }
     get addToCartCheckbox()      { return $('input[@type="checkbox" and @name="addtocart"]'); }
     get quantityField()          { return $('td[@class="quantity"]//child::input[@class="qty-input"]'); }
@@ -67,7 +66,7 @@ class Wishlist extends Page {
     }
 
     wishlistItemProductPage() {
-        this.wishlistItemLink.click();
+        this.wishlistItem.click();
     }
 
     //Verify that the added item is indeed displayed on the wishlist
