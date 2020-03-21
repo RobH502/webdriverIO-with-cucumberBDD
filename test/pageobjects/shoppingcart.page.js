@@ -144,6 +144,12 @@ class Transactions extends Page {
         return this.cartItem.isDisplayed().should.be.false;
     }
 
+    //Verify that the item from the video games page has been added to and is displayed in the shopping cart
+    verifyItemAdded() {
+        this.addToCartXboxEliteSeries2.waitForDisplayed(3000);
+        return this.addToCartXboxEliteSeries2.isDisplayed().should.be.true;
+    }
+
 }
 
 export default new Transactions();

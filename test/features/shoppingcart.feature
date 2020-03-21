@@ -24,7 +24,7 @@ Feature: Making a transaction
 
             When i load the video games page
             And I attempt to add an item <item> to the shopping cart
-            Then I should see a popup message saying that the item was added to the cart
+            Then I see a confirmation message at the top of the screen
             When I load the shopping cart
             Then I should see the item on the shopping cart page
 

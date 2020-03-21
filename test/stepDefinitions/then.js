@@ -116,7 +116,7 @@ Then('the copyright disclaimer is displayed in the footer', function() {
 })
 
 
-//Transactions
+//Shopping Cart
 Then('I see a confirmation message at the top of the screen', function() {
   transactionsPage.addCartConfirmation();
 });
