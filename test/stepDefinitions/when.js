@@ -267,6 +267,18 @@ When('I go to the Orders tab in My account', function() {
     transactions.ordersTab();
 });
 
+When('I click the shopping cart link in the confirmation message at the top', function() {
+    transactions.clickPopupMessageLink();
+});
+
+When(/^I click the "Remove" checkbox of the listed cart item$/, function() {
+    transactions.clickCheckbox();
+});
+
+When('I click the Update shopping cart button', function() {
+    transactions.clickUpdateCart();
+})
+
 
 //**************************************************************************************************
 //Wishlist

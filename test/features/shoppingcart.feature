@@ -7,7 +7,7 @@ Feature: Making a transaction
     Background:
 
         Given I am logged in
-        And the shopping cart is empty
+        #And the shopping cart is empty
 
         Scenario Outline: Attempt to purchase an out of stock item
         
@@ -20,13 +20,25 @@ Feature: Making a transaction
         |"Animal Crossing"|
 
 
-        Scenario: Add an item to the shopping cart
+        Scenario Outline: Add an item to the shopping cart
 
-            When i load the video games page
+            When I load the video games page
             And I attempt to add an item <item> to the shopping cart
             Then I see a confirmation message at the top of the screen
-            When I load the shopping cart
-            Then I should see the item on the shopping cart page
+            When I click the shopping cart link in the confirmation message at the top
+            Then the item should be displayed on the shopping cart page
+
+        Examples:
+        |item|
+        |"Xbox Elite Controller"|
+
+
+        Scenario: Romove item from shopping cart
+
+            When I go to my shopping cart
+            And I click the "Remove" checkbox of the listed cart item
+            And I click the Update shopping cart button
+            Then the item should not be displayed on the shopping cart page
 
 
         # Scenario Outline: Purchasing an item

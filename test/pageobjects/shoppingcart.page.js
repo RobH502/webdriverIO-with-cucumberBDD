@@ -20,9 +20,13 @@ class Transactions extends Page {
     get addToCartXboxEliteSeries2()   { return $('//*[@data-productid="8"]//child::*[@class="details"]//child::*[@class="add-info"]//child::*[@class="buttons"]//input[@value="Add to cart"]'); }
     get popupMessageAdded()           { return $('//p[@class="content" and contains(text(),"The product has been added to your")]'); }
     get popupMessageOut()             { return $('//p[@class="content" and text()="Out of stock"]'); }
+    get popupMessageLink()            { return $('//p[@class="content" and contains(text(),"The product has been added to your")]//child::a[contains(@href, "/cart")]'); }
 
     //Shopping cart
     get emptyCartMessage()            { return $('//div[@class="no-data" and text()="Your Shopping Cart is empty!"]'); }
+
+    get removeCheckbox()              { return $('//input[@type="checkbox" and @name="removefromcart"]'); }
+    get updateCart()                  { return $('//input[@type="submit" and @name="updatecart"]'); }
 
     get countryDropdown()             { return $('//select[@id="CountryId"]'); }
     get stateProvinceDropdown()       { return $('//select[@id="StateProvinceId"]'); }
@@ -50,7 +54,7 @@ class Transactions extends Page {
     get orderStatus()                 { return $('//span[@class="order-status pending" and text()="Pending"]'); }
     //get orderStatus()               { return $('//ul[@class="info"]//child::li//child::span[@class="order-status pending" and text()="Pending"]'); }
 
-    get cartItem()      { return $('//tr//child::td[@class="product"]//child::a[@class="product-name" and contains(@href, "/microsoft-xbox-elite-wireless-controller-series-2")]'); }
+    get cartItem()                    { return $('//tr//child::td[@class="product"]//child::a[@class="product-name" and contains(@href, "/microsoft-xbox-elite-wireless-controller-series-2")]'); }
 
 
     //************************************************************************
@@ -61,6 +65,10 @@ class Transactions extends Page {
 
     toCart() {
         this.cartLink.click();
+    }
+
+    clickCheckbox() {
+        this.removeCheckbox.click();
     }
 
     addCartConfirmation() {
@@ -89,6 +97,9 @@ class Transactions extends Page {
                 break;
             case 'Xbox Windows Controller':
                 this.addToCartXboxWindowsContr.click();
+                break;
+            case 'Xbox Elite Controller':
+                this.addToCartXboxEliteSeries2.click();
                 break;
         }
     }
@@ -125,6 +136,19 @@ class Transactions extends Page {
         myAccount.ordersLink.click();
     }
 
+    clickPopupMessageLink() {
+        this.popupMessageLink.waitForDisplayed(3000);
+        this.popupMessageLink.click();
+    }
+
+    //Click the "Update shopping cart" button
+    clickUpdateCart() {
+        this.updateCart.click();
+    }
+
+
+    //*****************************************************************************************
+
     transactionVerification() {
         return this.orderNumber.isDisplayed() && this.orderStatus.isDisplayed();
     }
@@ -145,10 +169,10 @@ class Transactions extends Page {
     }
 
     //Verify that the item from the video games page has been added to and is displayed in the shopping cart
-    verifyItemAdded() {
-        this.addToCartXboxEliteSeries2.waitForDisplayed(3000);
-        return this.addToCartXboxEliteSeries2.isDisplayed().should.be.true;
-    }
+    // verifyItemAdded() {
+    //     this.addToCartXboxEliteSeries2.waitForDisplayed(3000);
+    //     return this.addToCartXboxEliteSeries2.isDisplayed().should.be.true;
+    // }
 
 }
 
