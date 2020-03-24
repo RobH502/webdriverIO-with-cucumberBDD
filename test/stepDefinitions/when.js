@@ -6,6 +6,7 @@ import videoGamesPage from '../pageobjects/videogames.page';
 import footerSection from '../pageobjects/footer.page';
 import transactions from '../pageobjects/shoppingcart.page';
 import wishlist from '../pageobjects/wishlist.page';
+import addProduct from '../pageobjects/addproduct.page';
 
 
 //Generic basic login function for testing that requires being logged in
@@ -17,6 +18,14 @@ When('I login to the site', function() {
 When('I am on the homepage of the site', function() {
     footerSection.loadHomepage();
 });
+
+//Login as an admin user
+When('I login as an admin user', function() {
+    loginPage.open();
+    browser.pause(3000);
+    loginPage.login('robert.hayes@auticon.us', 'PotterMalfoy21');
+    loginPage.clickLoginButton();
+})
 
 
 //*****************************************************************************************
@@ -341,4 +350,80 @@ When(/^I enter a valid personal message "([^"]*)"$/, function(message) {
 
 When(/^I clear the Your email address field$/, function() {
     wishlist.clearYourEmail();
+});
+
+
+//**************************************************************************************************
+//Add new product
+
+When('I click the Admin link at the top of the page', function() {
+    addProduct.clickAdminLink();
+});
+
+When('I click the Catalog menu option in the sidebar', function() {
+    addProduct.clickCatalogMenu();
+});
+
+When('I click the Products link in the Catalog menu', function() {
+    addProduct.clickProductsLink();
+});
+
+When('I click the Add new button', function() {
+    addProduct.clickAddNewButton();
+});
+
+When('I enter a Product Name', function() {
+    addProduct.enterProductName();
+});
+
+When('I enter a Short Description', function() {
+    addProduct.enterShortDescription();
+});
+
+When('I enter a Full Description', function() {
+    addProduct.enterFullDescription();
+});
+
+When('I enter an SKU', function() {
+    addProduct.enterSku();
+});
+
+When('I select an option from Categories', function() {
+    addProduct.selectCategories();
+});
+
+When('I enter a Price', function() {
+    addProduct.enterPrice();
+});
+
+When('I select a Tax Category', function() {
+    addProduct.selectTaxCategory();
+});
+
+When('I enter data in the Shipping section', function() {
+    addProduct.enterShippingInfo();
+});
+
+When('I select an Inventory method', function() {
+    addProduct.selectInventoryMethod();
+});
+
+When('I click the Save and Continue Edit button', function() {
+    addProduct.clickSaveContinueButton();
+});
+
+When('I upload an image', function() {
+    addProduct.uploadPicture();
+});
+
+When('I click the Save button', function() {
+    addProduct.clickSaveButton();
+});
+
+When('I click the Public store link', function() {
+    addProduct.clickPublicStoreLink();
+});
+
+When('I load the correct products page', function() {
+    addProduct.loadResultsPage();
 });

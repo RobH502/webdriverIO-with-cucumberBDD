@@ -16,6 +16,13 @@ Given('I am on the site homepage', function() {
   footerSection.loadHomepage();
 });
 
+Given('I am logged in as an admin user', function() {
+  loginPage.open();
+  browser.pause(3000);
+  loginPage.login('robert.hayes@auticon.us', 'PotterMalfoy21');
+  loginPage.clickLoginButton();
+});
+
 //Login page
 Given('I am on the login page', function() {
   loginPage.open();

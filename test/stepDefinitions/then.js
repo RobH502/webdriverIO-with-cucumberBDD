@@ -6,6 +6,7 @@ import videoGamesPage from '../pageobjects/videogames.page';
 import footerSection from '../pageobjects/footer.page';
 import transactionsPage from '../pageobjects/shoppingcart.page';
 import wishlist from '../pageobjects/wishlist.page';
+import addProduct from '../pageobjects/addproduct.page';
 
 
 //Login
@@ -185,3 +186,23 @@ Then('I should see a message saying "Your message has been sent."', function() {
   browser.pause(5000);
   wishlist.verifyEmailSuccessMessage();
 })
+
+
+//*************************************************************************************************
+//Add new product
+
+Then('I should be redirected to the Admin page', function() {
+  addProduct.verifyAdminPageLoaded();
+});
+
+Then('I should be dredirected to the Add new product CMS page', function() {
+  addProduct.verifyAddNewCMSLoaded();
+});
+
+Then('I should see a success message at the top of the page', function() {
+  addProduct.verifySuccessMessage();
+});
+
+Then('I should see the new product displayed on the page', function() {
+  addProduct.verifyNewProductDisplayed();
+});
