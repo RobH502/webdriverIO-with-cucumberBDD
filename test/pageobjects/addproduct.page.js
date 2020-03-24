@@ -33,15 +33,17 @@ class AddProduct extends Page {
     get inventoryMethod()     { return $('//select[@name="ManageInventoryMethodId"]'); }
 
     get picturesHeader()      { return $('//body[@class="skin-blue sidebar-mini basic-settings-mode"]/div[@class="wrapper"]/div[@class="content-wrapper"]/div/form/div[@class="content"]/div[@class="form-horizontal"]/nop-panels/nop-panel[5]/div[1]/div[1]'); }
-    get uploadPictureFile()   { return $('//div[@class="qq-upload-button-selector qq-upload-button qq-upload-button-hover"]//input[@name="qqfile"]'); }
+    get uploadPictureFile()   { return $('//div[@class="upload-image-button pull-left margin-t-5"]//div//input[@name="qqfile"]'); }
     get addProductPicBtn()    { return $('//button[contains(text(),"Add product picture")]'); }
     get removePictureBtn()    { return $('//span[contains(text(),"Remove picture")]'); }
 
     get attributesHeader()    { return $('//div[@class="panel-heading opened"]//span[contains(text(),"Product attributes")]'); }
 
     get saveContinueEdit()    { return $('//button[@name="save-continue"]'); }
-    get saveBtn()             { return $('//button[@name="save"]//i[@class="fa fa-floppy-o"]'); }
+    //get saveBtn()             { return $('//button[@name="save"]'); }
+    get saveBtn()             { return $('//div[@id="ajaxBusy"]'); }
     get publicStoreLink()     { return $('//a[contains(text(),"Public store")]'); }
+    //get publicStoreLink()     { return $('//div[@id="ajaxBusy" and @style="display: block"]'); }
 
     get successMessage()      { return $('//div[@class="alert alert-success alert-dismissable"]'); }
 
@@ -76,11 +78,16 @@ class AddProduct extends Page {
     }
 
     clickSaveButton() {
+        this.saveBtn.waitForDisplayed(3000);
         this.saveBtn.click();
     }
 
-    clickPublicStoreLink() {
-        this.publicStoreLink.click();
+    // clickPublicStoreLink() {
+    //     this.publicStoreLink.click();
+    // }
+
+    accessPublicStore() {
+
     }
 
     verifyAdminPageLoaded() {
@@ -120,8 +127,10 @@ class AddProduct extends Page {
     selectCategories() {
         this.categoriesDiv.click();
         //this.categoriesDiv.setValue('Video Games >> Xbox One >> Xbox One Game');
+        $('//ul[@id="SelectedCategoryIds_listbox"]//li[text()="Video Games >> Xbox One >> Xbox One Games"]').waitForDisplayed(3000);
         $('//ul[@id="SelectedCategoryIds_listbox"]//li[text()="Video Games >> Xbox One >> Xbox One Games"]').moveTo();
         $('//ul[@id="SelectedCategoryIds_listbox"]//li[text()="Video Games >> Xbox One >> Xbox One Games"]').click();
+        browser.pause(5000);
     }
 
 
@@ -174,6 +183,7 @@ class AddProduct extends Page {
         
         const remoteFilePath = browser.uploadFile(filePath);
         this.uploadPictureFile.setValue(remoteFilePath);
+        this.removePictureBtn.waitForDisplayed(10000);
         this.addProductPicBtn.click();
     }
 
@@ -192,8 +202,8 @@ class AddProduct extends Page {
 
     //Verify new product displayed on site
     verifyNewProductDisplayed() {
-        $('//h2[@class="product-title"]//a[contains(text(),"Test Prod RH")]').waitForDisplayed(3000);
-        return $('//h2[@class="product-title"]//a[contains(text(),"Test Prod RH")]').isDisplayed().should.be.true;
+        $('//h2[@class="product-title"]//a[contains(text(),"Test Product RH")]').waitForDisplayed(3000);
+        return $('//h2[@class="product-title"]//a[contains(text(),"Test Product RH")]').isDisplayed().should.be.true;
     }
     
 }

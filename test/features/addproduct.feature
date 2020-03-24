@@ -42,6 +42,5 @@ Feature: Add a Product
             Then I should see a success message at the top of the page
             When I upload an image
             And I click the Save button
-            And I click the Public store link
             And I load the correct products page
             Then I should see the new product displayed on the page
