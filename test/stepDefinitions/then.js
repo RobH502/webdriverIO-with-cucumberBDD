@@ -206,3 +206,7 @@ Then('I should see a success message at the top of the page', function() {
 Then('I should see the new product displayed on the page', function() {
   addProduct.verifyNewProductDisplayed();
 });
+
+Then('the product should no longer be listed', function() {
+  addProduct.verifyRemoved();
+})

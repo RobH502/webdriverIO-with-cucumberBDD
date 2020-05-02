@@ -427,3 +427,15 @@ When('I click the Public store link', function() {
 When('I load the correct products page', function() {
     addProduct.loadResultsPage();
 });
+
+When('I locate the item on the list', function() {
+    addProduct.locateResult();
+});
+
+When('I click the checkbox on the left', function() {
+    addProduct.clickRemoveCheckbox();
+});
+
+When('I click the Delete button', function() {
+    addProduct.clickDeleteButton();
+})
