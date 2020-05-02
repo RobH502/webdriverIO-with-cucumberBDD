@@ -3,7 +3,11 @@ const defaultTimeoutInterval = process.env.DEBUG ? (60 * 60 * 500) : 90000;
 exports.config = {
 
     specs: [
+<<<<<<< HEAD
       './test/features/login.feature',
+=======
+      './test/features/login',
+>>>>>>> 8d244d5ac782aeb1244981ddf7f804727a799fc8
     ],
     // Patterns to exclude.
     exclude: [
