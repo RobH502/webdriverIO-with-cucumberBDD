@@ -47,6 +47,13 @@ class AddProduct extends Page {
 
     get successMessage()      { return $('//div[@class="alert alert-success alert-dismissable"]'); }
 
+    get nextResultsPage()     { return $('//li[@class="paginate_button next"]//a//i'); }
+    get searchItem()          { return $('//td[contains(text(),"Test Product RH")]'); }
+    get removeCheckbox()      { return $('//td[contains(text(),"Test Product RH")]//parent::tr//child::td[@class=" text-center"]//child::input[@type="checkbox"]'); }
+    //get removeCheckbox()      { return $('//td[contains(text(),"Test Product RH")]//sibling::td[@class="text-center"]//child::input[@type="checkbox"]'); }
+    get deleteButton()        { return $('//button[@class="btn bg-red"]'); }
+    get deleteYesButton()     { return $('//button[@id="delete-selected-action-confirmation-submit-button"]'); }
+
     /*
     * define or overwrite page methods
     */
@@ -80,14 +87,6 @@ class AddProduct extends Page {
     clickSaveButton() {
         this.saveBtn.waitForDisplayed(3000);
         this.saveBtn.click();
-    }
-
-    // clickPublicStoreLink() {
-    //     this.publicStoreLink.click();
-    // }
-
-    accessPublicStore() {
-
     }
 
     verifyAdminPageLoaded() {
@@ -205,6 +204,73 @@ class AddProduct extends Page {
         $('//h2[@class="product-title"]//a[contains(text(),"Test Product RH")]').waitForDisplayed(3000);
         return $('//h2[@class="product-title"]//a[contains(text(),"Test Product RH")]').isDisplayed().should.be.true;
     }
+
+
+    //**************************************************************************************
+    //Removing a product
+
+    //Locate search result
+    locateResult() {
+        let found = false;
+        let count = 1;
+        while (!found && count <= 3) {
+            if (this.searchItem.isDisplayed()) {
+                console.log('FOUND ITEM');
+                return true;
+            } else {
+                console.log('NOT FOUND YET');
+                //this.nextResultsPage.isClickable() ? this.nextResultsPage.click() : found = true;
+                if (count < 3) {
+                    this.nextResultsPage.click();
+                    console.log('GOING TO NEXT PAGE');
+                } else {
+                    found = true;
+                    console.log('REACHED END');
+                }
+                count++;
+            }
+        }
+        return false;
+    }
+
+    clickRemoveCheckbox() {
+        browser.pause(10000);
+        this.removeCheckbox.click();
+        browser.pause(5000);
+    }
+
+    clickDeleteButton() {
+        this.deleteButton.click();
+        this.deleteYesButton.waitForDisplayed(3000);
+        this.deleteYesButton.click();
+    }
+
+    //Verify that the removed product is no longer present
+    verifyRemoved() {
+        super.open('Admin/Product/List');
+        //return !this.locateResult();
+        let found = false;
+        let count = 1;
+        while (!found && count <= 3) {
+            if (this.searchItem.isDisplayed()) {
+                console.log('FOUND ITEM');
+                return false;
+            } else {
+                console.log('NOT FOUND YET');
+                //this.nextResultsPage.isClickable() ? this.nextResultsPage.click() : found = true;
+                if (count < 3) {
+                    this.nextResultsPage.click();
+                    console.log('GOING TO NEXT PAGE');
+                } else {
+                    found = true;
+                    console.log('REACHED END');
+                }
+                count++;
+            }
+        }
+        return true;
+    }
+
     
 }
 
