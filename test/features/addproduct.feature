@@ -44,3 +44,14 @@ Feature: Add a Product
             And I click the Save button
             And I load the correct products page
             Then I should see the new product displayed on the page
+
+
+        Scenario: Remove product
+
+            When I click the Admin link at the top of the page
+            And I click the Catalog menu option in the sidebar
+            And I click the Products link in the Catalog menu
+            And I locate the item on the list
+            And I click the checkbox on the left
+            And I click the Delete button
+            Then the product should no longer be listed
